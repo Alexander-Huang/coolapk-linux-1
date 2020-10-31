@@ -8,6 +8,11 @@ jobs:
       PACKAGE_BUILD=lazygit
     steps:
       - uses: actions/checkout@v2
+      - name: Set GOPATH
+        run: |
+          echo "##[set-env name=;]$(dirname $GITHUB_WORKSPACE)"
+          echo "##[add-path]$(dirname $GITHUB_WORKSPACE)/bin"
+        shell: bash
       - name: passing pkgbuild
         id: passpkg
         run: |
