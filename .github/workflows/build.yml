@@ -19,7 +19,7 @@ jobs:
         with:
           target: 'run'
           pkgname: 'build/${{ PACKAGE_BUILD }}'
-          command: `cp -r build/${{ PACKAGE_BUILD }}/*.pkg.tar.zst coolapklinux/x86_64/ && cd coolapklinux/x86_64/ && repo-add coolapk-linux.db.tar.gz ${{ PACKAGE_BUILD }}-*.pkg.tar.zst
+          command: `cp -r build/${{ PACKAGE_BUILD }}/*.pkg.tar.zst coolapklinux/x86_64/ && cd coolapklinux/x86_64/ && repo-add coolapk-linux.db.tar.gz ${{ PACKAGE_BUILD }}-*.pkg.tar.zst `
       - name: Upload package
         id: upload
         run: |
