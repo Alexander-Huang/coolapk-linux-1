@@ -1,19 +1,25 @@
 name: build
-on:
-  schedule:
-    - cron:  '0 0 * * *'
+on: push
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    env: 
+      PACKAGE_BUILD=lazygit
     steps:
       - uses: actions/checkout@v2
+      - name: passing pkgbuild
+        id: passpkg
+        run: |
+          mkdir -p build/${{ PACKAGE_BUILD }}/
+          cp -r workfiles/${{ PACKAGE_BUILD }}/PKGBUILD build/${{ PACKAGE_BUILD }}/
       - name: Validate PKGBUILD
         id: validate-pkgbuild
-        uses: oganesson0512/arch-pkgbuild-builder@v1.16-cle-pre8
-        with:
-           target: 'pkgbuild'
-           dictionary: 'pkgbuild'
+        uses: 2m/arch-pkgbuild-builder@v1
+        arget: 'run'
+  pkgname: 'ucm-bin'
+  command: `ucm --version`
       - name: Upload package
         id: upload
         run: |
